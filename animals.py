@@ -146,7 +146,6 @@ if __name__ == '__main__':
     sheep_kudr = Sheep('Овца кудрявая', 65)
     chicken_ko = Chicken('Ко-ко', 4)
     chicken_ku = Chicken('Кукареку', 8)
-
-
-# коз "Рога" и "Копыта"
-# и утку "Кряква"
+    goat_roga = Goat('Коза рога', 28)
+    goat_kopyta = Goat('Коза копыта', 23)
+    duck = Duck('Утка Кряква', 13)
