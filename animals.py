@@ -27,6 +27,7 @@
 # Необходимо посчитать общий вес всех животных(экземпляров класса);
 # Вывести название самого тяжелого животного.
 
+from operator import attrgetter
 
 class Animals:
 
@@ -36,11 +37,9 @@ class Animals:
 
     def eating(self):
         print('Я животное! И меня сейчас накормили!')
-        super().eating()
 
     def voice(self):
         print('Я животное! И я говорю что-то!')
-        super().voice()
 
 
 # коза
@@ -48,15 +47,12 @@ class Goat(Animals):
 
     def get_milk(self):
         print('Я коза и я дам вам молока!')
-        super().get_milk()
 
     def eating(self):
         print('Я коза! И меня сейчас накормили!')
-        super().eating()
 
     def voice(self):
         print('Меееееее-еее')
-        super().voice()
 
 
 # корова
@@ -64,15 +60,12 @@ class Cow(Animals):
 
     def get_milk(self):
         print('Я корова и я дам вам молока!')
-        super().get_milk()
 
     def eating(self):
         print('Я корова! И меня сейчас накормили!')
-        super().eating()
 
     def voice(self):
         print('Муууууууу-ууу')
-        super().voice()
 
 
 # гусь
@@ -80,15 +73,12 @@ class Goose(Animals):
 
     def get_eggs(self):
         print('Я гусь и снес вам свежие яйца!')
-        super().get_eggs()
 
     def eating(self):
         print('Я гусь! И меня сейчас накормили!')
-        super().eating()
 
     def voice(self):
         print('Га-га-га-га')
-        super().voice()
 
 
 # утка
@@ -96,15 +86,12 @@ class Duck(Animals):
 
     def get_eggs(self):
         print('Я утка и снесла вам свежие яйца!')
-        super().get_eggs()
 
     def eating(self):
         print('Я утка! И меня сейчас накормили!')
-        super().eating()
 
     def voice(self):
         print('Кря-кря-кря-кря')
-        super().voice()
 
 
 # овца
@@ -115,11 +102,9 @@ class Sheep(Animals):
 
     def eating(self):
         print('Я овца! И меня сейчас накормили!')
-        super().eating()
 
     def voice(self):
         print('Бееееееее-еее')
-        super().voice()
 
 
 # курица
@@ -127,18 +112,21 @@ class Chicken(Animals):
 
     def get_eggs(self):
         print('Я курица и снесла вам свежие яйца!')
-        super().get_eggs()
 
     def eating(self):
         print('Я курица! И меня сейчас накормили!')
-        super().eating()
 
     def voice(self):
         print('Куд-кудах')
-        super().voice()
+
+
+#поиск животного с максимальным весом
+def max_weight(list):
+        return max(list, key=attrgetter('weight'))
 
 
 if __name__ == '__main__':
+
     goose_gray = Goose('Гусь серый', 7)
     goose_white = Goose('Гусь белый', 4)
     cow = Cow('Манька', 100)
@@ -149,3 +137,15 @@ if __name__ == '__main__':
     goat_roga = Goat('Коза рога', 28)
     goat_kopyta = Goat('Коза копыта', 23)
     duck = Duck('Утка Кряква', 13)
+
+    ferma = [goose_gray, goose_white, cow, sheep_kudr, sheep_barashek, chicken_ku,
+             chicken_ko, goat_roga, goat_kopyta, duck]
+
+    animal_max_weight = max_weight(ferma).name
+    print(f'Максимальный вес у {animal_max_weight}')
+
+    sum_weight = 0
+    for animal in ferma:
+        sum_weight += animal.weight
+
+    print(f'Вес всех животных на ферме {sum_weight} кг')
