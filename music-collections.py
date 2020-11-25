@@ -5,7 +5,8 @@
 # У класса Track есть поля:
 #
 # Название;
-# Длительность в минутах(используется тип данных int). И метод show, выводящий информацию по
+# Длительность в минутах(используется тип данных int).
+# И метод show, выводящий информацию по
 # треку в виде <Название-Длительность>.
 
 # У класса Album есть поля:
@@ -24,39 +25,56 @@
 # Создать 2 альбома с 3 треками. Для каждого вывести его длительность.
 
 class Track:
-    def __init__(self, name_track, minutes):
-        self.name_track = name_track
-        self.minutes = minutes
+    def __init__(self, name='', duration=0):
+        self.name = name
+        self.duration = duration
 
     def show(self):
-        print(f'<{self.name_track}> - {self.minutes}')
+        return f'<{self.name} - {self.duration}>'
+
+    def set_name(self, name):
+        self.name = name
+
+    def set_duration(self, duration):
+        self.duration = duration
 
 
-class Album(Track):
-    def __init__(self, name_album, name_group):
-        self.name_album = name_album
-        self.name_group = name_group
-        self.list_track = dict()
+class Album:
+    def __init__(self, name='', group=''):
+        self.name = name
+        self.group = group
+        self.tracks = []
 
     def get_tracks(self):
-        print(self.list_track)
-
-    def add_track(self, track, minute):
-        self.list_track[track] = minute
+        return [track.show() for track in self.tracks]
 
     def get_duration(self):
-        return sum(list(self.list_track.values()))
+        return sum([track.duration for track in self.tracks])
+
+    def add_track(self, track):
+        if not isinstance(track, Track):
+            raise NotImplementedError('Can not add this object to track list')
+        self.tracks.append(track)
 
 
-if __name__ == '__main__':
-    topchik = Album('Leto', 'Maksim')
-    topchik.add_track('Kak tak', 3)
-    topchik.add_track('Moe vremy', 2)
-    topchik.add_track('I love', 4)
+albums = []
+album = Album('The Fat of the Land', 'The Prodigy')
+album.add_track(Track('Narayan', 9))
+album.add_track(Track('Climbatize', 6))
+album.add_track(Track('Breathe', 5))
+breakpoint()
+albums.append(album)
+breakpoint()
+album = Album('Опиум', 'Агата Кристи')
+album.add_track(Track('Сказочная тайга', 2))
+album.add_track(Track('Чёрная луна', 4))
+album.add_track(Track('Трансильвания', 4))
+albums.append(album)
 
-    topchik.get_tracks()
+for album in albums:
+    print(f'Альбом "{album.name}" группы {album.group}:')
+    for track in enumerate(album.get_tracks(), 1):
+        print(f'{track[0]}. {track[1]}')
+    print(f'Общая длительность альбома: {album.get_duration()} минут\n')
 
-    duration = topchik.get_duration()
-    print(duration)
-
-    breakpoint()
+breakpoint()
