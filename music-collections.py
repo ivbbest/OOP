@@ -24,6 +24,7 @@
 # Задание:
 # Создать 2 альбома с 3 треками. Для каждого вывести его длительность.
 
+
 class Track:
     def __init__(self, name='', duration=0):
         self.name = name
