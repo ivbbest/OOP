@@ -27,6 +27,16 @@
 # Необходимо посчитать общий вес всех животных(экземпляров класса);
 # Вывести название самого тяжелого животного.
 
+# ДЗ 2 наследование, инкапсуляция и полиморфизм
+
+#Задание 1:
+# Вам нужно реализовать родительский класс для всех животных и вынести общее поведение в него.
+# От родительского класса должны будут отнаследоваться все остальные животные.
+# В родительском классе должно быть 2-3 общих класса и общие поля.
+#
+# Задание 2:
+# Используя методы из родительского класса, вызовите их в цикле у списка всех животных.
+
 from operator import attrgetter
 
 class Animals:
@@ -36,10 +46,10 @@ class Animals:
         self.weight = weight
 
     def eating(self):
-        print('Я животное! И меня сейчас накормили!')
+        pass
 
     def voice(self):
-        print('Я животное! И я говорю что-то!')
+        pass
 
 
 # коза
@@ -74,8 +84,10 @@ class Goose(Animals):
     def get_eggs(self):
         print('Я гусь и снес вам свежие яйца!')
 
+
     def eating(self):
         print('Я гусь! И меня сейчас накормили!')
+
 
     def voice(self):
         print('Га-га-га-га')
@@ -147,5 +159,25 @@ if __name__ == '__main__':
     sum_weight = 0
     for animal in ferma:
         sum_weight += animal.weight
+
+        # Используя методы из родительского класса, вызовите их в цикле у списка всех животных.
+        print(f'Для животного с именем {animal.name} выведем все возможности!!\n')
+
+        if 'eating' in dir(animal):
+            animal.eating()
+            
+        if 'voice' in dir(animal):
+            animal.voice()
+        
+        if 'get_eggs' in dir(animal):
+            animal.get_eggs()
+
+        if 'get_milk' in dir(animal):
+            animal.get_milk()
+
+        if 'to_cut' in dir(animal):
+            animal.to_cut()
+
+        print('***'*33)
 
     print(f'Вес всех животных на ферме {sum_weight} кг')
