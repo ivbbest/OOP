@@ -41,6 +41,18 @@ class Track:
     def set_duration(self, duration):
         self.duration = duration
 
+    def __gt__(self, other):
+        return len(self.duration) > len(other.duration)
+
+    def __lt__(self, other):
+        return len(self.duration) < len(other.duration)
+
+    def __ge__(self, other):
+        return len(self.duration) >= len(other.duration)
+
+    def __le__(self, other):
+        return len(self.duration) <= len(other.duration)
+
 
 class Album:
     def __init__(self, name='', group=''):
@@ -69,7 +81,6 @@ album = Album('The Fat of the Land', 'The Prodigy')
 album.add_track(Track('Narayan', 9))
 album.add_track(Track('Climbatize', 6))
 album.add_track(Track('Breathe', 5))
-
 albums.append(album)
 
 album = Album('Опиум', 'Агата Кристи')
@@ -79,7 +90,8 @@ album.add_track(Track('Трансильвания', 4))
 albums.append(album)
 
 for album in albums:
-    print(f'Name group: {album.group}\nName album: {album.name}')
-    for track in enumerate(album.get_tracks(), 1):
-        print(f'{track[0]}. {track[1]}')
+    print(f'Name group: {album.group}\nName album: {album.name}\nTracks:')
+    my_tracks = album.get_tracks()
+    for track in my_tracks:
+        print(f'  {track}')
     print(f'Общая длительность альбома: {album.get_duration()} минут\n')
