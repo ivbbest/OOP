@@ -61,11 +61,17 @@ class Album:
         self.tracks = []
 
     def __str__(self):
-        pass
-    
+        return (
+            f'Name group: {self.group}\nName album: {self.name}\n'
+            f'Продолжительность звучания: {self.get_duration()} минут\n'
+            f'Tracks:\n{self.get_tracks()}'
+        )
 
     def get_tracks(self):
-        return [str(track) for track in self.tracks]
+        result = ''
+        for track in self.tracks:
+            result += f'  {track} \n'
+        return result
 
     def get_duration(self):
         return sum([track.duration for track in self.tracks])
@@ -77,6 +83,7 @@ class Album:
 
 
 albums = []
+
 album = Album('The Fat of the Land', 'The Prodigy')
 album.add_track(Track('Narayan', 9))
 album.add_track(Track('Climbatize', 6))
@@ -90,8 +97,4 @@ album.add_track(Track('Трансильвания', 4))
 albums.append(album)
 
 for album in albums:
-    print(f'Name group: {album.group}\nName album: {album.name}\nTracks:')
-    my_tracks = album.get_tracks()
-    for track in my_tracks:
-        print(f'  {track}')
-    print(f'Общая длительность альбома: {album.get_duration()} минут\n')
+    print(album)
